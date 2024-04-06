@@ -1,0 +1,24 @@
+[tool.poetry]
+name = "offspringengine"
+version = "0.1.0"
+description = ""
+authors = ["AWildDevAppears <joshuacburgess32@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = ">=3.12,<3.13"
+dearpygui = "^1.11.0"
+zodb = "^5.8.1"
+toga = "^0.4.2"
+black = "^24.2.0"
+btrees = "^5.2"
+yapf = "^0.40.2"
+mypy = "^1.9.0"
+tinydb = "^4.8.0"
+
+[tool.yapf]
+based_on_style = "google"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

@@ -1,0 +1,26 @@
+{
+  "AI": {},
+  "NPCS": {},
+  "ITEM_MODIFICATIONS": {},
+  "STRUCTURES": {},
+  "MAPS": {
+    "1": {
+      "id": "MP00000001",
+      "name": "Foo"
+    },
+    "2": {
+      "id": "MP00000002",
+      "name": "bar"
+    }
+  },
+  "ITEMS": {
+    "1": {
+      "id": "IT00000001",
+      "name": "Basic weapon",
+      "description": "A basic weapon used for testing",
+      "type": "Weapon",
+      "minDamage": 12,
+      "maxDamage": 15
+    }
+  }
+}

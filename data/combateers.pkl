@@ -1,0 +1,60 @@
+import* "./maps/*.pkl" as maps
+import* "./items/*.pkl" as items
+
+class Pawn {
+    behaviour: String
+}
+
+class Behaviour {
+}
+
+AI: Mapping<String, Behaviour> = new {
+
+}
+
+NPCS: Mapping<String, Pawn> = new {
+
+}
+
+class ItemModifier {
+}
+
+
+ITEM_MODIFICATIONS: Mapping<String, ItemModifier> = new {
+}
+
+class Structure {
+}
+
+STRUCTURES: Mapping<String, Structure> = new {
+
+}
+
+class Location {
+    id: String
+    name: String
+}
+
+MAPS: Mapping<String, Location> = maps
+    .toMap()
+    .mapKeys((key, val) -> key.drop(key.indexOf(Regex("[0-9]"))).dropLast(4))
+    .mapValues((_, val) -> val.toDynamic().toTyped(Location))
+    .toMapping()
+
+typealias EquipSlot = "Weapon"|"Chest"|"Head"|"Legs"|"Feet"|"Hands"|"Trinket"
+
+class Equipment {
+    id: String
+    name: String
+    description: String
+    type: EquipSlot
+    defence: Int?
+    minDamage: Int?
+    maxDamage: Int?
+}
+
+ITEMS: Mapping<String, Equipment> = items
+    .toMap()
+    .mapKeys((key, val) -> key.drop(key.indexOf(Regex("[0-9]"))).dropLast(4))
+    .mapValues((_, val) -> val.toDynamic().toTyped(Equipment))
+    .toMapping()
