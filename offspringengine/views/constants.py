@@ -5,3 +5,4 @@ class Views(Enum):
     INTRO = "intro"
     MAIN_MENU = "main_menu"
     DUNGEON_REWARDS = "dungeon_rewards"
+    MERCENARY_SELECT = "mercenary_select"

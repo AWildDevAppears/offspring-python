@@ -4,6 +4,7 @@ from toga.app import App
 from toga.widgets.base import Widget
 from toga.widgets.box import Box
 
+from offspringengine.views import view_character_choose
 from offspringengine.views.ui_component import UIComponent
 
 from . import view_intro, view_main_menu, view_dungeon_rewards, constants
@@ -27,6 +28,8 @@ class OffspringApp(App):
             constants.Views.DUNGEON_REWARDS:
                 view_dungeon_rewards.rewards_screen(self.switch_view,
                                                     self.main_window.content)
+            constants.Views.MERCENARY_SELECT:
+                view_character_choose.merc_select(self.switch_view)
         }
 
         view = self.views[constants.Views.MAIN_MENU]

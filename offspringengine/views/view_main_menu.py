@@ -21,7 +21,7 @@ def main_menu_view(
             switch_view(Views.DUNGEON_REWARDS)
 
         def on_load_pressed(widget, **_):
-            pass
+            switch_view(Views.MERCENARY_SELECT)
 
         def on_quit_pressed(widget, **_):
             on_quit()

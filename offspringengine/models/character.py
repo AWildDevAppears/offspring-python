@@ -1,31 +1,97 @@
+from typing import cast
 import persistent
 from .equipment import (
-    ArmorChest,
-    ArmorFeet,
-    ArmorGloves,
-    ArmorHelmet,
-    ArmorLegs,
+    Armor,
+    EquipSlot,
     EquipTrinket,
+    Equipment,
+    Weapon,
 )
+
+class CharacterModifier:
+    def __init__(self) -> None:
+        self.name = ""
 
 
 class Character(persistent.Persistent):
-    def __init__(self) -> None:
-        self.name = ""
+    def __init__(self, name: str) -> None:
+        self.name = name
         self.attack = 0
         self.base_defence = 0
         self.health = 0
         self.base_healthMax = 0
 
-        self.head_armor: ArmorHelmet | None = None
-        self.body_armor: ArmorChest | None = None
-        self.leg_armor: ArmorLegs | None = None
-        self.feet_armor: ArmorFeet | None = None
-        self.hand_armor: ArmorGloves | None = None
+        self.head_armor: Armor | None = None
+        self.body_armor: Armor | None = None
+        self.leg_armor: Armor | None = None
+        self.feet_armor: Armor | None = None
+        self.hand_armor: Armor | None = None
         self.trinket: EquipTrinket | None = None
+        self.weapon_slot: Weapon | None = None
+
+        self.modifiers: list[CharacterModifier] = []
 
     def get_is_dead(self):
         return self.health <= 0
+
+    def equip(self, equip: Equipment):
+        match(equip.slot):
+            case EquipSlot.WEAPON:
+                self.weapon_slot = cast(Weapon, equip)
+                return
+            case EquipSlot.CHEST:
+                self.body_armor = cast(Armor, equip)
+                return
+            case EquipSlot.HEAD:
+                self.head_armor = cast(Armor, equip)
+                return
+            case EquipSlot.LEGS:
+                self.leg_armor = cast(Armor, equip)
+                return
+            case EquipSlot.FEET:
+                self.feet_armor = cast(Armor, equip)
+                return
+            case EquipSlot.GLOVES:
+                self.hand_armor = cast(Armor, equip)
+                return
+            case EquipSlot.TRINKET:
+                self.trinket = cast(EquipTrinket, equip)
+                return
+            case _:
+                pass
+
+    def unequip(self, slot: EquipSlot):
+        match(slot):
+            case EquipSlot.WEAPON:
+                item = self.weapon_slot
+                self.weapon_slot = None
+                return item
+            case EquipSlot.CHEST:
+                item = self.body_armor
+                self.body_armor = None
+                return item
+            case EquipSlot.HEAD:
+                item = self.head_armor
+                self.head_armor = None
+                return item
+            case EquipSlot.LEGS:
+                item = self.leg_armor
+                self.leg_armor = None
+                return item
+            case EquipSlot.FEET:
+                item = self.feet_armor
+                self.feet_armor = None
+                return item
+            case EquipSlot.GLOVES:
+                item = self.hand_armor
+                self.hand_armor = None
+                return item
+            case EquipSlot.TRINKET:
+                item = self.trinket
+                self.trinket = None
+                return item
+            case _:
+                pass
 
     def get_defence(self):
         defence = self.base_defence
