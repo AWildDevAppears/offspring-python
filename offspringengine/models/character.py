@@ -11,7 +11,6 @@ from .equipment import (
 
 class Character(persistent.Persistent):
     def __init__(self) -> None:
-        super().__init__()
         self.name = ""
         self.attack = 0
         self.base_defence = 0
@@ -26,7 +25,7 @@ class Character(persistent.Persistent):
         self.trinket: EquipTrinket | None = None
 
     def get_is_dead(self):
-        return self.health == 0
+        return self.health <= 0
 
     def get_defence(self):
         defence = self.base_defence

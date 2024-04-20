@@ -16,6 +16,13 @@
   "ITEMS": {
     "1": {
       "id": "IT00000001",
+      "name": "Basic armor",
+      "description": "A basic armor used for testing",
+      "type": "Chest",
+      "defence": 10
+    },
+    "2": {
+      "id": "IT00000002",
       "name": "Basic weapon",
       "description": "A basic weapon used for testing",
       "type": "Weapon",

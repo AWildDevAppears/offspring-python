@@ -1,0 +1,6 @@
+id = "IT00000002"
+name = "Basic weapon"
+type = "Weapon"
+description = "A basic weapon used for testing"
+minDamage = 12
+maxDamage = 15

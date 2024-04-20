@@ -22,34 +22,16 @@ class EquipLevels(Enum):
     UNIQUE = "unique"
 
 
-class Item(persistent.Persistent):
+class Equipment(persistent.Persistent):
     def __init__(self, name: str, description: str) -> None:
-        super().__init__()
         self.name: str = name
         self.description = description
-
-
-class Equipment(Item):
-    def __init__(self, name: str, description: str) -> None:
-        super().__init__(name, description)
         self.slot = EquipSlot.NONE
         self.rarity = EquipLevels.COMMON
         self.mods: list[EquipModifier] = []
 
     def full_name(self):
-        match self.rarity:
-            case EquipLevels.DAMAGED:
-                return f"damaged {self.name}"
-            case EquipLevels.UNCOMMON:
-                return f"uncommon {self.name}"
-            case EquipLevels.RARE:
-                return f"rare {self.name}"
-            case EquipLevels.LEGENDARY:
-                return f"legendary {self.name}"
-            case EquipLevels.UNIQUE:
-                return f"unique {self.name}"
-            case _:
-                return self.name
+        return f"{self.rarity} {self.name}"
 
 
 class Weapon(Equipment):
@@ -68,44 +50,13 @@ class Armor(Equipment):
         self.defence = defence
 
 
-class ArmorChest(Armor):
-    def __init__(self, name: str, description: str, defence: int) -> None:
-        super().__init__(name, description, defence)
-        self.slot = EquipSlot.CHEST
-
-
-class ArmorHelmet(Armor):
-    def __init__(self, name: str, description: str, defence: int) -> None:
-        super().__init__(name, description, defence)
-        self.slot = EquipSlot.HEAD
-
-
-class ArmorLegs(Armor):
-    def __init__(self, name: str, description: str, defence: int) -> None:
-        super().__init__(name, description, defence)
-        self.slot = EquipSlot.LEGS
-
-
-class ArmorFeet(Armor):
-    def __init__(self, name: str, description: str, defence: int) -> None:
-        super().__init__(name, description, defence)
-        self.slot = EquipSlot.FEET
-
-
-class ArmorGloves(Armor):
-    def __init__(self, name: str, description: str, defence: int) -> None:
-        super().__init__(name, description, defence)
-        self.slot = EquipSlot.GLOVES
-
-
 class EquipTrinket(Equipment):
     def __init__(self, name: str, description: str) -> None:
         super().__init__(name, description)
         self.slot = EquipSlot.TRINKET
 
 
-type ArmorType = ArmorHelmet | ArmorLegs | ArmorGloves | ArmorFeet | ArmorChest
-type EquipmentType = ArmorType | Weapon | EquipTrinket
+type EquipmentType = Armor | Weapon | EquipTrinket
 
 
 class EquipStatMod:

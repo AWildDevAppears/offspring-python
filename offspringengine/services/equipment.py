@@ -1,13 +1,9 @@
 import random
-from typing import Any, cast
+from typing import cast
 
 from offspringengine.services.database import get_item_by_id
 from ..models.equipment import (
-    ArmorChest,
-    ArmorFeet,
-    ArmorGloves,
-    ArmorHelmet,
-    ArmorLegs,
+    Armor,
     EquipLevels,
     EquipSlot,
     EquipStatMod,
@@ -45,41 +41,32 @@ def get_equipable_for_slot(slot: EquipSlot, name: str, desc: str):
     match slot:
         case EquipSlot.TRINKET:
             return EquipTrinket(name, desc)
-        case EquipSlot.GLOVES:
-            return ArmorGloves(name, desc, 0)
-        case EquipSlot.HEAD:
-            return ArmorHelmet(name, desc, 0)
-        case EquipSlot.CHEST:
-            return ArmorChest(name, desc, 0)
-        case EquipSlot.FEET:
-            return ArmorFeet(name, desc, 0)
-        case EquipSlot.LEGS:
-            return ArmorLegs(name, desc, 0)
         case EquipSlot.WEAPON:
             return Weapon(name, desc, 0, 0)
         case _:
-            return None
+            armor = Armor(name, desc, 0)
+            armor.slot = slot;
+            return armor
 
 
 def get_random_equippable():
-    item: list[Any] = get_item_by_id("IT00000001")
+    item: dict[str, str] = get_item_by_id("IT00000001")
 
-    item = item
 
-    if item["slot"] is EquipSlot.NONE:
+    if item["type"] is EquipSlot.NONE:
         return None
 
     item_obj: Equipment = get_equipable_for_slot(
-        item["slot"], item["name"], item["desc"]
+        item["type"], item["name"], item["description"]
     )
     item_level: EquipStatMod = get_equipable_level_effect()
 
     item_obj.rarity = item_level.rarity
 
-    if item["slot"] is EquipSlot.WEAPON:
+    if item["type"] is EquipSlot.WEAPON:
         return cast(Weapon, item_obj)
 
-    if item["slot"] is EquipSlot.TRINKET:
+    if item["type"] is EquipSlot.TRINKET:
         return cast(EquipTrinket, item_obj)
 
     # item["slot"] is an armor type:
@@ -88,17 +75,4 @@ def get_random_equippable():
         item_level.stats_min, item_level.stats_max
     )
 
-    if item["slot"] is EquipSlot.HEAD:
-        return cast(ArmorHelmet, item_obj)
-
-    if item["slot"] is EquipSlot.CHEST:
-        return cast(ArmorChest, item_obj)
-
-    if item["slot"] is EquipSlot.LEGS:
-        return cast(ArmorLegs, item_obj)
-
-    if item["slot"] is EquipSlot.FEET:
-        return cast(ArmorFeet, item_obj)
-
-    if item["slot"] is EquipSlot.GLOVES:
-        return cast(ArmorGloves, item_obj)
+    return cast(Armor, item_obj)
