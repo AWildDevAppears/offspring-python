@@ -1,0 +1,8 @@
+name = "Mark of life"
+id = "mod-health-static"
+effect {
+    target = "health"
+    effect = "increase_static"
+    amount = 10
+    on = "equip"
+}

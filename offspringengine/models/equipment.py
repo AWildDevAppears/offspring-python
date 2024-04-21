@@ -68,11 +68,18 @@ class EquipStatMod:
         self.slots = slots
 
 
+class EquipModifierEffect:
+    def __init__(self, target: str, effect: str, amount: int, on: str) -> None:
+        self.target = target
+        self.effect = effect
+        self.amount = amount
+        self.on = on
+
+
 class EquipModifier:
-    def __init__(self) -> None:
+    def __init__(self, id: str, name: str, effect: EquipModifierEffect) -> None:
         super().__init__()
-        self.name = ""
-        self.description = ""
+        self.id = id
+        self.name = name
         self.rarity = None
-        self.element = None
-        self.trigger = None
+        self.effect = effect

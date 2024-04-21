@@ -1,0 +1,9 @@
+name = "Mark of the brute"
+id = "mod-damage-melee-percentage"
+effect {
+    target = "damage"
+    effect = "increase_percentage"
+    amount = 10
+    on = "equip"
+}
+

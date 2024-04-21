@@ -1,0 +1,9 @@
+name = "Mark of the risk taker"
+id = "mod-critical-chance"
+effect {
+    target = "crit_chance"
+    effect = "increase_percentage"
+    amount = 10
+    on = "equip"
+}
+

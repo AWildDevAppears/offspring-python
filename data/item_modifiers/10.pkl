@@ -1,0 +1,9 @@
+name = "Mark of the inferno"
+id = "mod-damage-burn-percentage"
+effect {
+    target = "damage:burn"
+    effect = "increase_percentage"
+    amount = 10
+    on = "equip"
+}
+

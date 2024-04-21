@@ -1,0 +1,9 @@
+name = "Mark of sloth"
+id = "mod-slow-duration-static"
+effect {
+    target = "duration:slow"
+    effect = "increase_static"
+    amount = 10
+    on = "equip"
+}
+

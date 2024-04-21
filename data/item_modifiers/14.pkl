@@ -1,0 +1,9 @@
+name = "Mark of the frozen tundra"
+id = "mod-damage-freeze-percentage"
+effect {
+    target = "damage:freeze"
+    effect = "increase_percentage"
+    amount = 10
+    on = "equip"
+}
+

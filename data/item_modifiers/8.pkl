@@ -1,0 +1,9 @@
+name = "Mark of the snake"
+id = "mod-damage-poison-percentage"
+effect {
+    target = "damage:poison"
+    effect = "increase_percentage"
+    amount = 10
+    on = "equip"
+}
+

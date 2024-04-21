@@ -5,11 +5,14 @@ This engine is written in python, although I may change this in the future for V
 
 # What we use:
 
-* https://zodb-docs.readthedocs.io/
+* Poetry
+* TinyDB
+* PKL
+* Toga
 
 # Setup
 
-To use this project, you will need poetry installed. 
+To use this project, you will need poetry installed.
 See [poetry's documentation](https://python-poetry.org/docs/main/) to get it installed.
 
 ## Building the project
@@ -34,5 +37,5 @@ poetry run python offspringengine
 In order to format the files you will need to run
 
 ```
-poetry run black
+poetry run lint
 ```

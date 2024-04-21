@@ -1,10 +1,12 @@
 import random
 from typing import cast
 
-from offspringengine.services.database import get_item_by_id
+from offspringengine.services.database import get_item_by_id, get_item_mod_by_idx, get_item_mod_count
 from ..models.equipment import (
     Armor,
     EquipLevels,
+    EquipModifier,
+    EquipModifierEffect,
     EquipSlot,
     EquipStatMod,
     EquipTrinket,
@@ -48,6 +50,24 @@ def get_equipable_for_slot(slot: EquipSlot, name: str, desc: str):
             armor.slot = slot;
             return armor
 
+def get_random_mods(count: int):
+    mods: list[EquipModifier] = []
+    exclude: list[int] = []
+    max: int = get_item_mod_count()
+
+    for i in range(count):
+        idx = random.randint(1, max)
+        while idx in exclude:
+            idx = random.randint(1, max)
+
+        exclude.append(idx)
+        item: dict[str, str] = get_item_mod_by_idx(idx)
+
+        fx: dict[str, str] = item["effect"]
+        effect = EquipModifierEffect(fx["target"], fx["effect"], fx["amount"], fx["on"])
+        mods.append(EquipModifier(item["id"], item["name"], effect))
+
+    return mods
 
 def get_random_equippable():
     item: dict[str, str] = get_item_by_id("IT00000001")
@@ -62,6 +82,8 @@ def get_random_equippable():
     item_level: EquipStatMod = get_equipable_level_effect()
 
     item_obj.rarity = item_level.rarity
+
+    item_obj.mods = get_random_mods(item_level.slots)
 
     if item["type"] is EquipSlot.WEAPON:
         return cast(Weapon, item_obj)

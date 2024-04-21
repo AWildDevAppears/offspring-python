@@ -1,0 +1,8 @@
+name = "Mark of the archer"
+id = "mod-damage-ranged-percentage"
+effect {
+    target = "damage"
+    effect = "increase_percentage"
+    amount = 10
+    on = "equip"
+}

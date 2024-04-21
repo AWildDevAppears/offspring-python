@@ -1,0 +1,9 @@
+name = "Mark of the heretic"
+id = "mod-curse-duration-static"
+effect {
+    target = "duration:curse"
+    effect = "increase_static"
+    amount = 10
+    on = "equip"
+}
+

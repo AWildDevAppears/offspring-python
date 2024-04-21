@@ -1,0 +1,8 @@
+name = "Mark of sanguine"
+id = "mod-life-steal-static"
+effect {
+    target = "health"
+    effect = "absorb_static"
+    amount = 10
+    on = "attack"
+}

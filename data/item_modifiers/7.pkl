@@ -1,0 +1,9 @@
+name = "Mark of the heavy hitter"
+id = "mod-crit-multiplier-static"
+effect {
+    target = "crit_mult"
+    effect = "increase_static"
+    amount = 10
+    on = "equip"
+}
+

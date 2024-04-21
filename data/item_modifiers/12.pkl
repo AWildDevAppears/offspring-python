@@ -1,0 +1,9 @@
+name = "Mark of Sparks"
+id = "mod-damage-lightning-percentage"
+effect {
+    target = "damage:shock"
+    effect = "increase_percentage"
+    amount = 10
+    on = "equip"
+}
+

@@ -1,0 +1,9 @@
+name = "Mark of the undying flame"
+id = "mod-burn-duration-static"
+effect {
+    target = "duration:burn"
+    effect = "increase_static"
+    amount = 10
+    on = "attack"
+}
+

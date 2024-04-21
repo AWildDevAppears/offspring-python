@@ -43,18 +43,26 @@ def rewards_screen(
         if roller.item is None:
             return
 
+
         item_name = Label(f"Name: {roller.item.full_name()}")
         item_defence = Label(f"Defence: {roller.item.defence}")
         reroll_button = Button("Re-roll", on_press=on_reroll_pressed)
         back_button = Button("Go back", on_press=on_back_pressed)
 
+        widgets = [
+            item_name,
+            item_defence,
+        ]
+
+        if roller.item.mods is not None:
+            for mod in roller.item.mods:
+                widgets.append(Label(f"Mod: {mod.name}"))
+
+        widgets.append(reroll_button)
+        widgets.append(back_button)
+
         return Box(
-            children=[
-                item_name,
-                item_defence,
-                reroll_button,
-                back_button,
-            ],
+            children=widgets,
             style=Pack(direction=COLUMN, alignment=LEFT, padding=10),
         )
 

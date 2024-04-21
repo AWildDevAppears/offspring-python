@@ -1,7 +1,6 @@
 {
   "AI": {},
   "NPCS": {},
-  "ITEM_MODIFICATIONS": {},
   "STRUCTURES": {},
   "MAPS": {
     "1": {
@@ -28,6 +27,198 @@
       "type": "Weapon",
       "minDamage": 12,
       "maxDamage": 15
+    }
+  },
+  "ITEM_MODIFIERS": {
+    "1": {
+      "id": "mod-health-static",
+      "name": "Mark of life",
+      "effect": {
+        "target": "health",
+        "effect": "increase_static",
+        "amount": 10,
+        "on": "equip"
+      }
+    },
+    "10": {
+      "id": "mod-damage-burn-percentage",
+      "name": "Mark of the inferno",
+      "effect": {
+        "target": "damage:burn",
+        "effect": "increase_percentage",
+        "amount": 10,
+        "on": "equip"
+      }
+    },
+    "11": {
+      "id": "mod-burn-duration-static",
+      "name": "Mark of the undying flame",
+      "effect": {
+        "target": "duration:burn",
+        "effect": "increase_static",
+        "amount": 10,
+        "on": "attack"
+      }
+    },
+    "12": {
+      "id": "mod-damage-lightning-percentage",
+      "name": "Mark of Sparks",
+      "effect": {
+        "target": "damage:shock",
+        "effect": "increase_percentage",
+        "amount": 10,
+        "on": "equip"
+      }
+    },
+    "13": {
+      "id": "mod-lighnining-duration-static",
+      "name": "Mark of Shocks",
+      "effect": {
+        "target": "duration:shock",
+        "effect": "increase_static",
+        "amount": 10,
+        "on": "equip"
+      }
+    },
+    "14": {
+      "id": "mod-damage-freeze-percentage",
+      "name": "Mark of the frozen tundra",
+      "effect": {
+        "target": "damage:freeze",
+        "effect": "increase_percentage",
+        "amount": 10,
+        "on": "equip"
+      }
+    },
+    "15": {
+      "id": "mod-freeze-duration-static",
+      "name": "Mark of permafrost",
+      "effect": {
+        "target": "duration:freeze",
+        "effect": "increase_static",
+        "amount": 10,
+        "on": "equip"
+      }
+    },
+    "16": {
+      "id": "mod-damage-bleed-percentage",
+      "name": "Mark of the butcher",
+      "effect": {
+        "target": "damage:bleed",
+        "effect": "increase_percentage",
+        "amount": 10,
+        "on": "equip"
+      }
+    },
+    "17": {
+      "id": "mod-blleed-duration-static",
+      "name": "Mark of bloodlust",
+      "effect": {
+        "target": "duration:bleed",
+        "effect": "increase_static",
+        "amount": 10,
+        "on": "equip"
+      }
+    },
+    "18": {
+      "id": "mod-curse-duration-static",
+      "name": "Mark of the heretic",
+      "effect": {
+        "target": "duration:curse",
+        "effect": "increase_static",
+        "amount": 10,
+        "on": "equip"
+      }
+    },
+    "19": {
+      "id": "mod-slow-duration-static",
+      "name": "Mark of sloth",
+      "effect": {
+        "target": "duration:slow",
+        "effect": "increase_static",
+        "amount": 10,
+        "on": "equip"
+      }
+    },
+    "2": {
+      "id": "mod-life-steal-static",
+      "name": "Mark of sanguine",
+      "effect": {
+        "target": "health",
+        "effect": "absorb_static",
+        "amount": 10,
+        "on": "attack"
+      }
+    },
+    "3": {
+      "id": "mod-regen-percentage",
+      "name": "Mark of regeneration",
+      "effect": {
+        "target": "health",
+        "effect": "increase_percentage",
+        "amount": 10,
+        "on": "turn"
+      }
+    },
+    "4": {
+      "id": "mod-damage-melee-percentage",
+      "name": "Mark of the brute",
+      "effect": {
+        "target": "damage",
+        "effect": "increase_percentage",
+        "amount": 10,
+        "on": "equip"
+      }
+    },
+    "5": {
+      "id": "mod-damage-ranged-percentage",
+      "name": "Mark of the archer",
+      "effect": {
+        "target": "damage",
+        "effect": "increase_percentage",
+        "amount": 10,
+        "on": "equip"
+      }
+    },
+    "6": {
+      "id": "mod-critical-chance",
+      "name": "Mark of the risk taker",
+      "effect": {
+        "target": "crit_chance",
+        "effect": "increase_percentage",
+        "amount": 10,
+        "on": "equip"
+      }
+    },
+    "7": {
+      "id": "mod-crit-multiplier-static",
+      "name": "Mark of the heavy hitter",
+      "effect": {
+        "target": "crit_mult",
+        "effect": "increase_static",
+        "amount": 10,
+        "on": "equip"
+      }
+    },
+    "8": {
+      "id": "mod-damage-poison-percentage",
+      "name": "Mark of the snake",
+      "effect": {
+        "target": "damage:poison",
+        "effect": "increase_percentage",
+        "amount": 10,
+        "on": "equip"
+      }
+    },
+    "9": {
+      "id": "mod-poison-duration-static",
+      "name": "Mark of the dart frog",
+      "effect": {
+        "target": "duration:poison",
+        "effect": "increase_static",
+        "amount": 10,
+        "on": "attack"
+      }
     }
   }
 }

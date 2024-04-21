@@ -1,0 +1,9 @@
+name = "Mark of the butcher"
+id = "mod-damage-bleed-percentage"
+effect {
+    target = "damage:bleed"
+    effect = "increase_percentage"
+    amount = 10
+    on = "equip"
+}
+

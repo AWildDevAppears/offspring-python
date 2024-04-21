@@ -1,5 +1,6 @@
 import* "./maps/*.pkl" as maps
 import* "./items/*.pkl" as items
+import* "./item_modifiers/*.pkl" as item_mods
 
 class Pawn {
     behaviour: String
@@ -14,13 +15,6 @@ AI: Mapping<String, Behaviour> = new {
 
 NPCS: Mapping<String, Pawn> = new {
 
-}
-
-class ItemModifier {
-}
-
-
-ITEM_MODIFICATIONS: Mapping<String, ItemModifier> = new {
 }
 
 class Structure {
@@ -57,4 +51,27 @@ ITEMS: Mapping<String, Equipment> = items
     .toMap()
     .mapKeys((key, val) -> key.drop(key.indexOf(Regex("[0-9]"))).dropLast(4))
     .mapValues((_, val) -> val.toDynamic().toTyped(Equipment))
+    .toMapping()
+
+class ItemModifierEffect {
+    target: String
+    effect: "increase_static" | "increase_percentage" | "decrease_static" | "descrease_percentage" | "absorb_static" | "absorb_percentage"
+    amount: Int
+    on: "equip" | "turn" | "attack"
+}
+
+class ItemModifier {
+    id: String
+    name: String
+    effect: ItemModifierEffect
+}
+
+ITEM_MODIFIERS: Mapping<String, ItemModifier> = item_mods
+    .toMap()
+    .mapKeys((key, val) -> key.drop(key.indexOf(Regex("[0-9]"))).dropLast(4))
+    .mapValues((_, val) -> (val) {
+            effect = val.effect.toTyped(ItemModifierEffect)
+        }
+        .toDynamic()
+        .toTyped(ItemModifier))
     .toMapping()
