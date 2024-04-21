@@ -14,13 +14,6 @@ from ..models.equipment import (
     Weapon,
 )
 
-my_dummy_item = {
-    "name": "my special helmet",
-    "desc": "An item used for testing purposes",
-    "slot": EquipSlot.HEAD,
-    "defence": 10,
-}
-
 
 def get_equipable_level_effect():
     level = random.randint(0, 1000)
@@ -50,6 +43,7 @@ def get_equipable_for_slot(slot: EquipSlot, name: str, desc: str):
             armor.slot = slot;
             return armor
 
+
 def get_random_mods(count: int):
     mods: list[EquipModifier] = []
     exclude: list[int] = []
@@ -69,9 +63,9 @@ def get_random_mods(count: int):
 
     return mods
 
+
 def get_random_equippable():
     item: dict[str, str] = get_item_by_id("IT00000001")
-
 
     if item["type"] is EquipSlot.NONE:
         return None
