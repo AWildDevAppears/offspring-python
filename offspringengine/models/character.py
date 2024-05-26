@@ -13,13 +13,23 @@ class CharacterModifier:
         self.name = ""
 
 
-class Character(persistent.Persistent):
+class Pawn(persistent.Persistent):
     def __init__(self, name: str) -> None:
         self.name = name
         self.attack = 0
         self.base_defence = 0
         self.health = 0
-        self.base_healthMax = 0
+        self.base_health_max = 0
+
+        self.modifiers: list[CharacterModifier] = []
+
+    def get_is_dead(self):
+        return self.health <= 0
+
+
+class Character(Pawn):
+    def __init__(self, name: str) -> None:
+        super().__init__(name)
 
         self.head_armor: Armor | None = None
         self.body_armor: Armor | None = None
@@ -28,11 +38,6 @@ class Character(persistent.Persistent):
         self.hand_armor: Armor | None = None
         self.trinket: EquipTrinket | None = None
         self.weapon_slot: Weapon | None = None
-
-        self.modifiers: list[CharacterModifier] = []
-
-    def get_is_dead(self):
-        return self.health <= 0
 
     def equip(self, equip: Equipment):
         match(equip.slot):
@@ -112,3 +117,8 @@ class Character(persistent.Persistent):
             defence += self.hand_armor.defence
 
         return defence
+
+class Enemy(Pawn):
+    def __init__(self, name: str) -> None:
+        super().__init__(name)
+
