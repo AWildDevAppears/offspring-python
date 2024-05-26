@@ -1,0 +1,13 @@
+
+name = "Trip"
+description = "Sweep the leg and knock the opponent over"
+damage = 8
+target = "enemy"
+modifiers = new Listing {
+    new {
+        id = 2
+        turns = 1
+        amount = 0
+        mode = "apply"
+    }
+}

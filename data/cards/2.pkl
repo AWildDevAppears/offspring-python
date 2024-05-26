@@ -1,0 +1,12 @@
+name = "Bandage wounds"
+description = "Wrap your wounds in bandages"
+damage = -25
+target = "self"
+modifiers = new Listing {
+    new {
+        id = 1
+        turns = 1
+        amount = 0
+        mode = "negate"
+    }
+}

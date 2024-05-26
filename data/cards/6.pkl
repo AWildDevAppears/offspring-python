@@ -1,0 +1,6 @@
+
+name = "Thorn"
+description = "Strike the enemy with your weapon"
+damage = 10
+target = "enemy"
+modifiers = new Listing {}

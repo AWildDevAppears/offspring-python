@@ -1,0 +1,13 @@
+
+name = "Viper strike"
+description = ""
+damage = 8
+target = "enemy"
+modifiers = new Listing {
+    new {
+        id = 3,
+        turns = 2
+        amount = 4
+        mode = "apply"
+    }
+}

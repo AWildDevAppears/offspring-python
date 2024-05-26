@@ -1,0 +1,6 @@
+
+name = "Poisoning hands"
+description = ""
+damage = 10
+target = "enemy"
+modifiers = new Listing {}
