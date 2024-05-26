@@ -220,5 +220,189 @@
         "on": "attack"
       }
     }
+  },
+  "CARDS": {
+    "1": {
+      "name": "Slash",
+      "description": "Strike the enemy with your weapon",
+      "damage": 10,
+      "target": "enemy",
+      "modifiers": []
+    },
+    "10": {
+      "name": "Slash",
+      "description": "Strike the enemy with your weapon",
+      "damage": 10,
+      "target": "enemy",
+      "modifiers": []
+    },
+    "11": {
+      "name": "Slash",
+      "description": "Strike the enemy with your weapon",
+      "damage": 10,
+      "target": "enemy",
+      "modifiers": []
+    },
+    "12": {
+      "name": "Slash",
+      "description": "Strike the enemy with your weapon",
+      "damage": 10,
+      "target": "enemy",
+      "modifiers": []
+    },
+    "13": {
+      "name": "Slash",
+      "description": "Strike the enemy with your weapon",
+      "damage": 10,
+      "target": "enemy",
+      "modifiers": []
+    },
+    "14": {
+      "name": "Slash",
+      "description": "Strike the enemy with your weapon",
+      "damage": 10,
+      "target": "enemy",
+      "modifiers": []
+    },
+    "15": {
+      "name": "Slash",
+      "description": "Strike the enemy with your weapon",
+      "damage": 10,
+      "target": "enemy",
+      "modifiers": []
+    },
+    "16": {
+      "name": "Slash",
+      "description": "Strike the enemy with your weapon",
+      "damage": 10,
+      "target": "enemy",
+      "modifiers": []
+    },
+    "17": {
+      "name": "Slash",
+      "description": "Strike the enemy with your weapon",
+      "damage": 10,
+      "target": "enemy",
+      "modifiers": []
+    },
+    "18": {
+      "name": "Slash",
+      "description": "Strike the enemy with your weapon",
+      "damage": 10,
+      "target": "enemy",
+      "modifiers": []
+    },
+    "19": {
+      "name": "Slash",
+      "description": "Strike the enemy with your weapon",
+      "damage": 10,
+      "target": "enemy",
+      "modifiers": []
+    },
+    "2": {
+      "name": "Bandage wounds",
+      "description": "Wrap your wounds in bandages",
+      "damage": -25,
+      "target": "self",
+      "modifiers": [
+        {
+          "id": 1,
+          "turns": 1,
+          "amount": 0,
+          "mode": "negate"
+        }
+      ]
+    },
+    "20": {
+      "name": "Slash",
+      "description": "Strike the enemy with your weapon",
+      "damage": 10,
+      "target": "enemy",
+      "modifiers": []
+    },
+    "21": {
+      "name": "Slash",
+      "description": "Strike the enemy with your weapon",
+      "damage": 10,
+      "target": "enemy",
+      "modifiers": []
+    },
+    "22": {
+      "name": "Slash",
+      "description": "Strike the enemy with your weapon",
+      "damage": 10,
+      "target": "enemy",
+      "modifiers": []
+    },
+    "23": {
+      "name": "Slash",
+      "description": "Strike the enemy with your weapon",
+      "damage": 10,
+      "target": "enemy",
+      "modifiers": []
+    },
+    "24": {
+      "name": "Slash",
+      "description": "Strike the enemy with your weapon",
+      "damage": 10,
+      "target": "enemy",
+      "modifiers": []
+    },
+    "25": {
+      "name": "Slash",
+      "description": "Strike the enemy with your weapon",
+      "damage": 10,
+      "target": "enemy",
+      "modifiers": []
+    },
+    "3": {
+      "name": "Slash",
+      "description": "Strike the enemy with your weapon",
+      "damage": 10,
+      "target": "enemy",
+      "modifiers": []
+    },
+    "4": {
+      "name": "Slash",
+      "description": "Strike the enemy with your weapon",
+      "damage": 10,
+      "target": "enemy",
+      "modifiers": []
+    },
+    "5": {
+      "name": "Slash",
+      "description": "Strike the enemy with your weapon",
+      "damage": 10,
+      "target": "enemy",
+      "modifiers": []
+    },
+    "6": {
+      "name": "Slash",
+      "description": "Strike the enemy with your weapon",
+      "damage": 10,
+      "target": "enemy",
+      "modifiers": []
+    },
+    "7": {
+      "name": "Slash",
+      "description": "Strike the enemy with your weapon",
+      "damage": 10,
+      "target": "enemy",
+      "modifiers": []
+    },
+    "8": {
+      "name": "Slash",
+      "description": "Strike the enemy with your weapon",
+      "damage": 10,
+      "target": "enemy",
+      "modifiers": []
+    },
+    "9": {
+      "name": "Slash",
+      "description": "Strike the enemy with your weapon",
+      "damage": 10,
+      "target": "enemy",
+      "modifiers": []
+    }
   }
 }

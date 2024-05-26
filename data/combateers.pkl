@@ -1,6 +1,7 @@
 import* "./maps/*.pkl" as maps
 import* "./items/*.pkl" as items
 import* "./item_modifiers/*.pkl" as item_mods
+import* "./cards/*.pkl" as cards
 
 class Pawn {
     behaviour: String
@@ -75,3 +76,27 @@ ITEM_MODIFIERS: Mapping<String, ItemModifier> = item_mods
         .toDynamic()
         .toTyped(ItemModifier))
     .toMapping()
+
+class CardModifier {
+    id: Int
+    turns: Int
+    amount: Int
+    mode: "apply" | "negate"
+}
+
+class Card {
+    name: String
+    description: String
+    damage: Int
+    target: "self" | "enemy" | "enemy_all" | "all" | "arena" | "spell"
+    modifiers: List<CardModifier>
+}
+
+CARDS  = cards
+    .toMap()
+    .mapKeys((key, value) -> key.drop(key.indexOf(Regex("[0-9]"))).dropLast(4))
+    .mapValues((_, val) -> (val) {
+            modifiers = val.modifiers.toList().map((val) -> val.toTyped(CardModifier))
+        }.toDynamic().toTyped(Card))
+    .toMapping()
+
