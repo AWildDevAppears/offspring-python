@@ -24,7 +24,7 @@ class CardModifierIndex():
 
 
 class Card:
-    def __init__(self, name: str, descrition: str, damage: int, target: CardTarget, modifiers: list[str]):
+    def __init__(self, name: str, descrition: str, damage: int, target: CardTarget, modifiers: list[str]) -> None:
         self.name: str = name
         self.descrition: str = descrition
         self.damage: int = damage

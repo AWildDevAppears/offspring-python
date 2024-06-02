@@ -23,7 +23,7 @@ class Pawn(persistent.Persistent):
 
         self.modifiers: list[CharacterModifier] = []
 
-    def get_is_dead(self):
+    def get_is_dead(self) -> bool:
         return self.health <= 0
 
 
@@ -39,7 +39,7 @@ class Character(Pawn):
         self.trinket: EquipTrinket | None = None
         self.weapon_slot: Weapon | None = None
 
-    def equip(self, equip: Equipment):
+    def equip(self, equip: Equipment) -> None:
         match(equip.slot):
             case EquipSlot.WEAPON:
                 self.weapon_slot = cast(Weapon, equip)
