@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="100%">
+    <rect
+        x="1rem"
+        y="1rem"
+        rx="1rem"
+        height="calc(100% - 2rem)"
+        width="calc(100% - 2rem)"
+        strokeWidth="0.25rem"
+        stroke="#685634"
+        fill="#C5AFA4"
+    >
+    </rect>
+</svg>

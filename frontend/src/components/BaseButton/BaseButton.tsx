@@ -7,7 +7,7 @@ import { Button, ButtonProps } from "@mui/base"
 import { SxProps, Theme, styled } from "@mui/system"
 
 interface IBaseButtonProps extends ButtonProps {
-    sx: SxProps<Theme>
+    sx?: SxProps<Theme>
 }
 
 const Styled = styled(Button)({

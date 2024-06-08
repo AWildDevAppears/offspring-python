@@ -22,32 +22,6 @@ type ViewHubState = "middle" | "alchemy" | "character" | "quest" | "deck" | "equ
 export const ViewHub: React.FC<IViewHubProps> = () => {
     const [mode, setMode] = useState<ViewHubState>("middle");
 
-    const switchMode = useCallback(() => {
-        switch (mode) {
-            case "middle":
-                setMode("alchemy");
-                return;
-            case "alchemy":
-                setMode("character");
-                return;
-            case "character":
-                setMode("quest");
-                return;
-            case "quest":
-                setMode("deck");
-                return;
-            case "deck":
-                setMode("equip");
-                return;
-            case "equip":
-                setMode("shop");
-                return;
-            case "shop":
-                setMode("middle");
-                return;
-        }
-    }, [mode]);
-
     const shouldShowLeft = useMemo(() => {
         switch (mode) {
             case "equip":
@@ -58,22 +32,47 @@ export const ViewHub: React.FC<IViewHubProps> = () => {
         }
     }, [mode]);
 
+    const navigator = useMemo(() => (
+        <Box component="div">
+            <BaseButton onClick={() => setMode("deck")}>
+                Deck builder
+            </BaseButton>
+            <BaseButton onClick={() => setMode("equip")}>
+                Equipment
+            </BaseButton>
+            <BaseButton onClick={() => setMode("alchemy")}>
+                Alchemy
+            </BaseButton>
+            <BaseButton onClick={() => setMode("quest")}>
+                Quest board
+            </BaseButton>
+            <BaseButton onClick={() => setMode("shop")}>
+                Shop
+            </BaseButton>
+            <BaseButton onClick={() => setMode("character")}>
+                Character view
+            </BaseButton>
+        </Box>
+    ), [mode])
+
+    const goBack = useCallback(() => setMode("middle"), []);
+
     const interactivePane = useMemo(() => {
         switch (mode) {
             case "deck":
-                return <DeckStorage />
+                return <DeckStorage onBack={goBack} />
             case "quest":
-                return <QuestBoard />
+                return <QuestBoard onBack={goBack} />
             case "equip":
-                return <EquipmentStorage />
+                return <EquipmentStorage onBack={goBack} />
             case "character":
-                return <CharacterSelect />
+                return <CharacterSelect onBack={goBack} />
             case "alchemy":
-                return <AlchemyStation />
+                return <AlchemyStation onBack={goBack} />
             case "shop":
-                return <Shop />
+                return <Shop onBack={goBack} />
             default:
-                return null;
+                return navigator;
         }
     }, [mode]);
 
@@ -91,6 +90,7 @@ export const ViewHub: React.FC<IViewHubProps> = () => {
     const shouldShowCenter = useMemo(() => {
         switch (mode) {
             case "quest":
+            case "middle":
                 return true;
             default:
                 return false;
@@ -98,11 +98,7 @@ export const ViewHub: React.FC<IViewHubProps> = () => {
     }, [mode]);
 
     return <Box sx={{ height: "100vh", width: "100vw", position: "relative", }}>
-        <Box sx={{ height: "100%", width: "100%", position: "absolute" }} />
-
-        <BaseButton onClick={switchMode} sx={{ position: "absolute", top: "1rem", left: "1rem" }}>
-            Switch mode {mode}
-        </BaseButton>
+         <Box sx={{ height: "100%", width: "100%", position: "absolute", pointerEvents: "none" }} />
 
         <Grid container>
             {shouldShowLeft && <Grid xs={6}>
