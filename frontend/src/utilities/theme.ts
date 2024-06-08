@@ -11,7 +11,7 @@ export const theme = createTheme({
         },
         background: {
             main: "#0E131F",
-            accentColor: "#E6AA68",
+            accentColor: "#0E131F",
         },
     },
 });
