@@ -1,8 +1,9 @@
-from views.views import init
+import webview
 
 
 def main():
-    init().main_loop()
+    webview.create_window("Hello world", "https://google.com")
+    webview.start()
 
 
 main()
