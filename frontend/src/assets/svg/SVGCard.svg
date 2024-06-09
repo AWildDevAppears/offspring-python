@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg xmlns="http://www.w3.org/2000/svg">
+
+    <symbol id="pinbl">
+        <polygon points="0,0 40,0 40,40" fill="#685634" />
+    </symbol>
+
+    <symbol id="pinbr">
+        <polygon points="40,0 0,0 0,40" fill="#685634" />
+    </symbol>
+
+    <rect
+        x="0"
+        y="0"
+        rx="1rem"
+        height="100%"
+        width="100%"
+        stroke-width="0.25rem"
+        stroke="#685634"
+        fill="#C5AFA4"
+    />
+
+    <rect
+        x="1rem"
+        y="1rem"
+        rx="1rem"
+        height="calc(100% - 2rem)"
+        width="calc(100% - 2rem)"
+        stroke-width="0.25rem"
+        stroke="#685634"
+        fill="transparent"
+    />
+
+    <rect
+        x="2rem"
+        y="2rem"
+        rx="1rem"
+        height="calc(50% - 6rem)"
+        width="calc(100% - 4rem)"
+        fill="#685634"
+    />
+
+    <use href="#pinbl" x="2rem" y="calc(100% - 4.5rem)"/>
+
+    <use href="#pinbr" x="calc(100% - 4.5rem)" y="calc(100% - 4.5rem)" />
+</svg>

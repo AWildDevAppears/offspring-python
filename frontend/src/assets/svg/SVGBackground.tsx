@@ -11,7 +11,7 @@ interface ISVGBackgroundProps extends PropsWithChildren {
 }
 
 export const SVGBackground = React.FC<ISVGBackgroundProps> = ({ path, sx, children }) => {
-    return <Box sx={{ height: "100vh", position: "relative",}}>
+    return <Box sx={{ height: "100%", width: "100%", position: "relative",}}>
         <Box component="div" height="100%" sx={
             {
                 maxWidth: "100%",

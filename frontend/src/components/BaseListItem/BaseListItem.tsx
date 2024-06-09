@@ -4,9 +4,10 @@
 
 import { styled } from "@mui/system";
 import React, { PropsWithChildren } from "react";
+import { Link } from "react-router-dom";
 
 interface IBaseListItemProps extends PropsWithChildren {
-
+    to: string;
 }
 
 const StyledListItem = styled("li")({
@@ -24,8 +25,10 @@ const StyledListItem = styled("li")({
     gridTemplateColumns: "1fr 3fr",
 });
 
-export const BaseListItem: React.FC<IBaseListItemProps> = ({ children }) => {
-    return <StyledListItem>
-        { children }
-    </StyledListItem>
+export const BaseListItem: React.FC<IBaseListItemProps> = ({ children, to }) => {
+    return <Link to={to}>
+        <StyledListItem>
+            { children }
+        </StyledListItem>
+    </Link>
 };

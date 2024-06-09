@@ -15,11 +15,13 @@ interface IQuestBoardProps {
 }
 
 export const QuestBoard: React.FC<IQuestBoardProps> = ({ onBack }) => {
+    const id = 1;
+
     return <SVGPaper>
         <Box component="div" sx={{ display: "flex", flexDirection: "column", height: "calc(100vh - 3rem)" }}>
             <Box component="div" sx={{ flex: "1" }}>
                 <BaseList>
-                    <BaseListItem>
+                    <BaseListItem to={`quests/${id}`}>
                         <BaseListItemTitle>Hello I am a quest</BaseListItemTitle>
                     </BaseListItem>
                 </BaseList>
