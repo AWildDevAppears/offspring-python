@@ -1,4 +1,6 @@
 from typing import cast
+from typing_extensions import is_typeddict
+from offspringengine.models.card import Card
 import persistent
 from .equipment import (
     Armor,
@@ -22,6 +24,7 @@ class Pawn(persistent.Persistent):
         self.base_health_max = 0
 
         self.modifiers: list[CharacterModifier] = []
+        self.effects: list[str] = []
 
     def get_is_dead(self) -> bool:
         return self.health <= 0
@@ -117,6 +120,13 @@ class Character(Pawn):
             defence += self.hand_armor.defence
 
         return defence
+
+    def apply_card(self, card: Card):
+        self.health -= card.damage
+
+        for mod in card.modifiers:
+            self.effects.append(mod)
+
 
 class Enemy(Pawn):
     def __init__(self, name: str) -> None:

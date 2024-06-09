@@ -1,8 +1,64 @@
+import random
 
-from offspringengine.models.card import Card
+from offspringengine.models.card import Card, CardTarget
 from offspringengine.models.character import Character
+from offspringengine.models.dungeon import Dungeon
+from offspringengine.models.room import Room, RoomType
 
 
+###
+# - Init -
+# Takes [player, enemy_pool, deck]
+# - Generate loot pool -
+# - Generate map -
+# * Work out how many locations are in this dungeon
+# * Decide how many loot rooms there will be
+# * Add boss fight to end
+# * Set room 1 as combat room
+# * randomly inject loot rooms
+# * mark all other rooms as combat rooms
+# * add monsters to all combat rooms
+# * set player location as room 1.
+# - Combat -
+# * - Player phase -
+# * set player stamina (GROUP 1)
+# * Deal player 7 cards
+# * Player picks card (GROUP 2)
+# * If target is enemy, player picks enemy
+# * Card is played
+# * reduce player stamina
+# * Cards the player does not have enough stamina to play get disabled
+# * If there are no more enemies jump to (GROUP 4)
+# * At any point the player can "end turn", when pressed go to (GROUP 3)
+# * Return to (GROUP 2)
+# * - Enemy phase -
+# * For each enemy: (GROUP 3)
+# * Enemy picks and plays card
+# * When no more enemies go to (GROUP 1)
+# * If player dead go to (GROUP 5)
+# * - Win - (GROUP 4)
+# * Set player location as next room
+# * If combat room go to (GROUP 1)
+# * If loot room go to (GROUP 6)
+# * If last room go to (GROUP 7)
+# * - Lose - (GROUP 5)
+# * Purge dungeon
+# * Send player to character select
+# * - Loot room - (GROUP 6)
+# * Generate loot for room
+# * Show loot to player
+# * Add loot to player inventory
+# * Go to (GROUP 4)
+# - Boss fight - (GROUP 7)
+# * Load boss combat scenario
+# * If lose fight go to (GROUP 5)
+# * If win fight:
+# * Add equipment to hub inventory
+# * Add gold to hub gold
+# * ...
+# * Show win screen
+# * When player presses continue button return to lobby
+###
 class DungeonState(object):
     gold: int = 0
     inventory: list[str] = []
@@ -14,7 +70,9 @@ class DungeonState(object):
     round: int = 0
 
     ## Dungeon
-    enemy_pool: list[Character] = []
+    enemy_pool: list[str] = []
+    dungeon: list[Room] = []
+    location_idx: int = 0
 
 class DungeonRes:
     def __init__(self, cont: bool) -> None:
@@ -24,9 +82,63 @@ class DungeonRes:
 dungeon_state = DungeonState()
 
 
-# TODO: Build dungeon object
-def dungeon_state_init(player_party: list[Character]):
+# Takes [player, enemy_pool, deck]
+# - Generate loot pool -
+# - Generate map -
+# * Work out how many locations are in this dungeon
+# * Decide how many loot rooms there will be
+# * Add boss fight to end
+# * Set room 1 as combat room
+# * randomly inject loot rooms
+# * mark all other rooms as combat rooms
+# * add monsters to all combat rooms
+# * set player location as room 1.
+def dungeon_state_init(player_party: list[Character], deck: list[Card], map: Dungeon):
     dungeon_state.player_party = player_party
+    dungeon_state.deck = deck
+    dungeon_state.enemy_pool = map.enemy_pool
+    #TODO: loot_pool
+
+    map_size = random.randint(6, 12)
+    loot_room_count = random.randint(0, 2)
+
+    dungeon_state.dungeon = []
+
+    for idx in range(map_size):
+        dungeon_state.dungeon.append(Room())
+
+    dungeon_state.dungeon[0] = prepare_combat_room(dungeon_state.dungeon[0])
+    dungeon_state.dungeon[len(dungeon_state.dungeon) - 1] = prepare_boss_room(dungeon_state.dungeon[len(dungeon_state.dungeon) - 1])
+
+    # Add all of our loot rooms
+    for idx in range(loot_room_count):
+        added = False
+        while not added:
+            location = random.randint(1, map_size - 1)
+            room = dungeon_state.dungeon[location]
+
+            if room.type is RoomType.UNASSIGNED:
+                room.type = RoomType.LOOT
+                added = True
+
+    # Fill out everything else with combat rooms
+    for room in dungeon_state.dungeon:
+        if room.type is RoomType.UNASSIGNED:
+            room = prepare_combat_room(room)
+
+    dungeon_state.location_idx = 0
+
+
+def prepare_combat_room(room: Room):
+    room.type = RoomType.COMBAT
+    # TODO: Add monsters to rooms
+    return room
+
+
+def prepare_boss_room(room: Room):
+    room.type = RoomType.BOSS
+    return room
+
 
 def next_round() -> DungeonRes:
     dungeon_state.round += 1
@@ -81,4 +193,38 @@ def on_finish_combat_round():
         return DungeonRes(False)
 
     return DungeonRes(True)
+
+
+def use_card(card: Card, caster: Character, target_label: CardTarget, target_list: Character[] = []):
+    match target_label:
+        case CardTarget.SELF:
+            caster.apply_card(card)
+            return
+        case CardTarget.ENEMY:
+            for target in target_list:
+                target.apply_card(card)
+
+            return
+        case CardTarget.ALL:
+            caster.apply_card(card)
+
+            for enemy in dungeon_state.enemy_party:
+                enemy.apply_card(card)
+
+            return
+        case CardTarget.ENEMY_ALL:
+            for enemy in dungeon_state.enemy_party:
+                enemy.apply_card(card)
+
+                return
+
+        case CardTarget.ARENA:
+            # Apply to dungeon
+            return
+
+        case CardTarget.SPELL:
+            # Apply to next spell
+            return
+
+
 

@@ -1,0 +1,6 @@
+name = "Training dummy"
+health = -1
+damage = 0
+personalities = {}
+abilities = {}
+
