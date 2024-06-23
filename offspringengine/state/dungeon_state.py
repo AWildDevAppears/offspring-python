@@ -1,9 +1,11 @@
 import random
 
 from offspringengine.models.card import Card, CardTarget
-from offspringengine.models.character import Character
+from offspringengine.models.character import Character, Pawn
 from offspringengine.models.dungeon import Dungeon
+from offspringengine.models.offspring_response import OffspringResponse
 from offspringengine.models.room import Room, RoomType
+from offspringengine.services.cards import create_deck_for
 
 
 ###
@@ -63,7 +65,7 @@ class DungeonState(object):
     gold: int = 0
     inventory: list[str] = []
     player_party: list[Character] = []
-    enemy_party: list[Character] = []
+    enemy_party: list[Pawn] = []
     deck: list[Card] = []
     current_hand: list[Card] = []
 
@@ -93,10 +95,12 @@ dungeon_state = DungeonState()
 # * mark all other rooms as combat rooms
 # * add monsters to all combat rooms
 # * set player location as room 1.
-def dungeon_state_init(player_party: list[Character], deck: list[Card], map: Dungeon):
-    dungeon_state.player_party = player_party
-    dungeon_state.deck = deck
-    dungeon_state.enemy_pool = map.enemy_pool
+
+## @Public
+def dungeon_state_init():
+    dungeon_state.player_party = []
+    dungeon_state.deck = create_deck_for(["C:001", "C:001", "C:001", "C:001", "C:001", "C:002", "C:002", "C:002", "C:003", "C:003"])
+    dungeon_state.enemy_pool = create_enemy_list_for(["E:001"])
     #TODO: loot_pool
 
     map_size = random.randint(6, 12)
@@ -129,18 +133,7 @@ def dungeon_state_init(player_party: list[Character], deck: list[Card], map: Dun
     dungeon_state.location_idx = 0
 
 
-def prepare_combat_room(room: Room):
-    room.type = RoomType.COMBAT
-    # TODO: Add monsters to rooms
-    return room
-
-
-def prepare_boss_room(room: Room):
-    room.type = RoomType.BOSS
-    return room
-
-
-def next_round() -> DungeonRes:
+def dungeon_next_round() -> DungeonRes:
     dungeon_state.round += 1
 
     # Trigger all modifiers to player
@@ -156,8 +149,25 @@ def next_round() -> DungeonRes:
     return on_finish_combat_round()
 
 
-def next_location():
+def dungeon_next_location():
     pass
+
+
+def dungeon_get_deck():
+    return OffspringResponse(False, data={
+        "deck": dungeon_state.deck
+    })
+
+## Private
+def prepare_combat_room(room: Room):
+    room.type = RoomType.COMBAT
+    # TODO: Add monsters to rooms
+    return room
+
+
+def prepare_boss_room(room: Room):
+    room.type = RoomType.BOSS
+    return room
 
 
 def purge():
@@ -195,7 +205,7 @@ def on_finish_combat_round():
     return DungeonRes(True)
 
 
-def use_card(card: Card, caster: Character, target_label: CardTarget, target_list: Character[] = []):
+def use_card(card: Card, caster: Character, target_label: CardTarget, target_list: list[Character] = []):
     match target_label:
         case CardTarget.SELF:
             caster.apply_card(card)

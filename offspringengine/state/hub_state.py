@@ -17,7 +17,7 @@ class HubState(object):
 hub_state = HubState()
 
 
-def assign_character(char: Character | None):
+def assign_character(char: Character | None) -> OffspringResponse:
     if char is not None and hub_state.character is not None:
         return OffspringResponse(True, message="Character already set")
 

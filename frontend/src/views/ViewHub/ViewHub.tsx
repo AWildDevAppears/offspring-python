@@ -4,7 +4,7 @@
 
 import React, { useCallback, useMemo, useState } from "react";
 import { BaseButton } from "../../components/BaseButton/BaseButton";
-import { Box } from "@mui/system";
+import { Box, positions } from "@mui/system";
 import Grid from "@mui/system/Unstable_Grid";
 import { DeckStorage } from "./DeckStorage/DeckStorage";
 import { QuestBoard } from "./QuestBoard/QuestBoard";
@@ -12,6 +12,7 @@ import { EquipmentStorage } from "./EquipmentStorage/EquipmentStorage";
 import { CharacterSelect } from "./CharacterSelect/CharacterSelect";
 import { AlchemyStation } from "./AlchemyStation/AlchemyStation";
 import { Shop } from "./Shop/Shop";
+import { Canvas } from "@react-three/fiber";
 
 interface IViewHubProps {
 
@@ -97,21 +98,31 @@ export const ViewHub: React.FC<IViewHubProps> = () => {
         }
     }, [mode]);
 
-    return <Box sx={{ height: "100vh", width: "100vw", position: "relative", }}>
-         <Box sx={{ height: "100%", width: "100%", position: "absolute", pointerEvents: "none" }} />
+    return (<Box
+        component="div"
+        sx={{ height: "100vh", width: "100vw", position: "relative" }}
+    >
+        <Canvas>
+            Hello I am a canvas
+        </Canvas>
 
-        <Grid container>
-            {shouldShowLeft && <Grid xs={6}>
-                {interactivePane}
-            </Grid>}
+        <Box
+            component="div"
+            sx={{ position: "absolute", top: "0", width: "100vw", height: "100vh" }}
+        >
+            <Grid container>
+                {shouldShowLeft && <Grid xs={6}>
+                    {interactivePane}
+                </Grid>}
 
-            {shouldShowCenter && <Grid xs={8} xsOffset={2}>
-                {interactivePane}
-            </Grid>}
+                {shouldShowCenter && <Grid xs={8} xsOffset={2}>
+                    {interactivePane}
+                </Grid>}
 
-            {shouldShowRight && <Grid xs={6} xsOffset={6}>
-                {interactivePane}
-            </Grid>}
-        </Grid>
-    </Box>;
+                {shouldShowRight && <Grid xs={6} xsOffset={6}>
+                    {interactivePane}
+                </Grid>}
+            </Grid>
+        </Box>
+    </Box>);
 }

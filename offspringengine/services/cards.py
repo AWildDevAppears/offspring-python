@@ -24,3 +24,19 @@ def get_random_card_pack(size: int) -> list[Card]:
 
     return items
 
+
+class CardRef():
+    def __init__(self, ref: str) -> None:
+        destruct = ref.split(":")
+        self.idx = int(destruct[1])
+        #self.modifiers = destruct[2]
+
+
+def create_deck_for(cardIds: list[str]) -> list[Card]:
+    items: list[Card] = []
+
+    for id in cardIds:
+        cardId = CardRef(id).idx
+        items.append(get_card_by_id(cardId))
+
+    return items

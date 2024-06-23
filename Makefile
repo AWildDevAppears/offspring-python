@@ -1,7 +1,12 @@
 shell:
 	poetry shell
 
-run:
+run: run_fe run_be
+
+run_fe:
+	cd ./frontend/ && npm run dev
+
+run_be:
 	poetry run python offspringengine
 
 lint:

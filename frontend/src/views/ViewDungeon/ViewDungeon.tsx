@@ -2,35 +2,34 @@
 * Copyright (c) AWildDevAppears
 */
 
-import { Box, Container } from "@mui/system";
-import Grid from "@mui/system/Unstable_Grid/Grid";
-import React from "react";
-import { SVGCard } from "../../assets/svg/SVGCard";
+import { Box } from "@mui/system";
+import React, { useEffect, useState } from "react";
+import { Canvas } from "@react-three/fiber";
+import { Offspring } from "../../utilities/offspring";
+import { ICard } from "../../models/Card";
 
 interface IViewDungeonProps {
 
 }
 
 export const ViewDungeon: React.FC<IViewDungeonProps> = () => {
+    const [deck, setDeck] = useState<ICard[]>([]);
+
+    useEffect(() => {
+        (async () => {
+            await Offspring.dungeon.initDungeon();
+
+            const newDeck = await Offspring.dungeon.getDeck();
+            console.log(newDeck)
+            setDeck(newDeck);
+        })();
+    }, []);
+
     return <div>
-        <Container>
-            <Box component="div" sx={{
-                display: "grid",
-                gridTemplateRows: "3fr 1fr",
-                gridTemplateColumns: "100%",
-                gridTemplateAreas: `
-                    "top"
-                    "hud"
-                `,
-            }}>
-                <Box height="45%" sx={{ gridArea: "hud" }}>
-                    <Grid container>
-                        <Grid xs={2}>
-                            <SVGCard />
-                        </Grid>
-                    </Grid>
-                </Box>
-            </Box>
-        </Container>
+        <Box component="div" sx={{ height: "100vh", color: "#FFF" }}>
+            {deck.map((card: ICard) => <div key={card.id}>
+                {Object.keys(card).map(key => <div key={key}>{key}: {card[key]}</div>)}
+            </div>)}
+        </Box>
     </div>
 };
